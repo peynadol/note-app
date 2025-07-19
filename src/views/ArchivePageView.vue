@@ -1,3 +1,3 @@
 <template>
-  <h1>I am the Archive Page</h1>
+  <h1 class="text-white">I am the Archive Page</h1>
 </template>
