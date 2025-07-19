@@ -29,7 +29,7 @@ const notes: Note[] = [
 ]
 </script>
 <template>
-  <div class="space-y-6">
+  <div class="space-y-6 p-4 w-full">
     <button class="bg-blue-500 w-full rounded p-2">+ Create New Note</button>
     <!-- <ul class="space-y-4">
       <li

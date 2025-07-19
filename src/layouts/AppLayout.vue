@@ -7,7 +7,6 @@ const navItems = [
   { label: 'All Notes', icon: 'pi pi-book', name: 'notes' },
   { label: 'Archive', icon: 'pi pi-folder', name: 'archive' },
 ]
-
 // TODO: replace with dynamic tags from a store or API
 // TODO: make tags toggleable and filter notes based on selected tags
 const tags = [
@@ -20,13 +19,11 @@ const tags = [
   { label: 'Favorites', icon: 'pi pi-tag', name: 'favorites' },
 ]
 </script>
-
 <template>
   <div class="grid grid-cols-[16rem_1fr] min-h-screen">
     <!-- Sidebar -->
     <aside class="bg-surface-800 text-white border-r border-slate-700 p-4">
       <h2 class="text-xl font-bold mb-6">My Notes</h2>
-
       <!-- Nav links -->
       <nav class="flex flex-col gap-2 border-b border-slate-700 pb-4">
         <RouterLink
@@ -39,7 +36,6 @@ const tags = [
           <span>{{ item.label }}</span>
         </RouterLink>
       </nav>
-
       <!-- Tags -->
       <nav class="flex flex-col gap-2 mt-6">
         <h3 class="text-lg font-semibold mb-2">Tags</h3>
@@ -55,9 +51,8 @@ const tags = [
         </ul>
       </nav>
     </aside>
-
     <!-- Main content area -->
-    <div class="flex flex-col">
+    <div class="flex flex-col h-full">
       <!-- Header inside content area -->
       <header class="bg-surface-700 text-white px-6 py-4 shadow border-b border-slate-700">
         <div class="flex items-center justify-between">
@@ -75,10 +70,9 @@ const tags = [
           </div>
         </div>
       </header>
-
       <!-- Routed page content -->
-      <main class="flex-1 p-8 bg-surface-900 text-white overflow-y-auto">
-        <div class="grid grid-cols-[14rem_1fr_14rem] gap-6">
+      <main class="flex-1 bg-surface-900 text-white overflow-y-auto">
+        <div class="grid grid-cols-[16rem_1fr_14rem] h-full">
           <NotesList />
           <NoteContent />
           <NoteActions />
@@ -87,7 +81,6 @@ const tags = [
     </div>
   </div>
 </template>
-
 <style scoped>
 .router-link-exact-active {
   background-color: rgb(71 85 105);
