@@ -6,8 +6,28 @@ const note = {
 }
 </script>
 <template>
-  <div class="p-6 border-x border-slate-700">
-    <h2>{{ note.title }}</h2>
+  <div class="border-x border-slate-700 px-4">
+    <div>
+      <!-- Header-->
+      <h2 class="text-2xl font-semibold mb-4">{{ note.title }}</h2>
+
+      <!-- Meta data -->
+      <div class="w-[50%] grid grid-cols-2 gap-y-2 text-sm text-slate-400 mb-6">
+        <p class="font-medium text-white">Tags</p>
+        <p>Dev, Vue</p>
+
+        <p class="font-medium text-white">Last edited</p>
+        <p>19 July 2025</p>
+      </div>
+    </div>
+
+    <!-- Content -->
     <p>{{ note.content }}</p>
+
+    <!-- Footer -->
+    <div class="mt-6 flex justify-between items-center">
+      <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Save Note</button>
+      <button class="text-white px-4 py-2 rounded hover:bg-red-600">Cancel Note</button>
+    </div>
   </div>
 </template>
