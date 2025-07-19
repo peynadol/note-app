@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import NotesListCard from './NotesListCard.vue'
 type Note = {
   id: number
   title: string
@@ -30,7 +31,7 @@ const notes: Note[] = [
 <template>
   <div class="space-y-6">
     <button class="bg-blue-500 w-full rounded p-2">+ Create New Note</button>
-    <ul class="space-y-4">
+    <!-- <ul class="space-y-4">
       <li
         v-for="note in notes"
         :key="note.id"
@@ -40,6 +41,9 @@ const notes: Note[] = [
         <p class="text-sm text-slate-400">{{ note.overview }}</p>
         <span class="text-xs text-slate-500">{{ note.date }}</span>
       </li>
-    </ul>
+    </ul> -->
+    <NotesListCard />
+    <NotesListCard />
+    <NotesListCard />
   </div>
 </template>

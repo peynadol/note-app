@@ -78,7 +78,7 @@ const tags = [
 
       <!-- Routed page content -->
       <main class="flex-1 p-8 bg-surface-900 text-white overflow-y-auto">
-        <div class="grid grid-cols-[18rem_1fr_14rem] gap-6">
+        <div class="grid grid-cols-[14rem_1fr_14rem] gap-6">
           <NotesList />
           <NoteContent />
           <NoteActions />
