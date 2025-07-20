@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import NotesList from '@/components/NotesList.vue'
 import NoteContentContainer from '@/components/NoteContentContainer.vue'
-import NoteActions from '@/components/NoteActions.vue'
 import LeftSidebar from '@/components/LeftSidebar.vue'
 </script>
 <template>
@@ -28,10 +27,9 @@ import LeftSidebar from '@/components/LeftSidebar.vue'
       </header>
       <!-- Routed page content -->
       <main class="flex-1 bg-surface-900 text-white overflow-y-auto">
-        <div class="grid grid-cols-[16rem_1fr_14rem] h-full">
+        <div class="grid grid-cols-[30%_1fr] h-full">
           <NotesList />
           <NoteContentContainer />
-          <NoteActions />
         </div>
       </main>
     </div>
