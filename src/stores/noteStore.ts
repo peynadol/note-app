@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-// maybe default the selected note to the most recent one
 
+// maybe default the selected note to the most recent one
 export type Note = {
   id: string
   title: string
@@ -11,84 +11,94 @@ export type Note = {
   archived: boolean
 }
 
+// default notes to use if localStorage is empty - mainly for development purposes
+// these can later be removed and will render a no notes message
+
+const defaultNotes: Note[] = [
+  {
+    id: '1',
+    title: 'Vue Notes',
+    content: 'Script setup is neat. Use defineProps for clarity.',
+    tags: ['Vue', 'Tips'],
+    createdAt: '2025-07-15',
+    updatedAt: '2025-07-18',
+    archived: false,
+  },
+  {
+    id: '2',
+    title: 'Archived ideas',
+    content: 'Think about keyboard shortcuts for editing flow.',
+    tags: ['UX'],
+    createdAt: '2025-07-10',
+    updatedAt: '2025-07-17',
+    archived: true,
+  },
+  {
+    id: '3',
+    title: 'Note-taking strategies',
+    content: 'Organize notes by category, search keywords, pin important notes.',
+    tags: ['Productivity', 'Organization'],
+    createdAt: '2025-07-20',
+    updatedAt: '2025-07-20',
+    archived: false,
+  },
+  {
+    id: '4',
+    title: 'Daily Journal',
+    content: 'Reflect on the day, jot down thoughts, and plan for tomorrow.',
+    tags: ['Personal', 'Reflection'],
+    createdAt: '2025-07-21',
+    updatedAt: '2025-07-21',
+    archived: false,
+  },
+]
+
+// function to load notes from localStorage
+const loadNotesFromLocalStorage = (): Note[] => {
+  try {
+    const saved = localStorage.getItem('notes')
+    if (saved) {
+      return JSON.parse(saved)
+    }
+  } catch (error) {
+    console.error('Error loading notes from localStorage:', error)
+  }
+  return defaultNotes
+}
+
 export const useNoteStore = defineStore('noteStore', {
   state: () => ({
-    notes: [
-      {
-        id: '1',
-        title: 'Vue Notes',
-        content: 'Script setup is neat. Use defineProps for clarity.',
-        tags: ['Vue', 'Tips'],
-        createdAt: '2025-07-15',
-        updatedAt: '2025-07-18',
-        archived: false,
-      },
-      {
-        id: '2',
-        title: 'Archived ideas',
-        content: 'Think about keyboard shortcuts for editing flow.',
-        tags: ['UX'],
-        createdAt: '2025-07-10',
-        updatedAt: '2025-07-17',
-        archived: true,
-      },
-      {
-        id: '3',
-        title: 'Note-taking strategies',
-        content: 'Organize notes by category, search keywords, pin important notes.',
-        tags: ['Productivity', 'Organization'],
-        createdAt: '2025-07-20',
-        updatedAt: '2025-07-20',
-        archived: false,
-      },
-      {
-        id: '4',
-        title: 'Daily Journal',
-        content: 'Reflect on the day, jot down thoughts, and plan for tomorrow.',
-        tags: ['Personal', 'Reflection'],
-        createdAt: '2025-07-21',
-        updatedAt: '2025-07-21',
-        archived: false,
-      },
-    ] as Note[],
+    notes: loadNotesFromLocalStorage(),
     selectedNoteId: '1',
     searchQuery: '',
     selectedTags: [] as string[],
     viewMode: 'notes' as 'notes' | 'archived',
   }),
-
   getters: {
     selectedNote: (state) => {
       return state.notes.find((note) => note.id === state.selectedNoteId) || null
     },
     filteredNotes: (state) => {
       let notes = state.notes
-
       // Apply archive filter
       notes = notes.filter((note) =>
         state.viewMode === 'archived' ? note.archived : !note.archived,
       )
-
       // If no filters, return early
       if (!state.searchQuery.trim() && !state.selectedTags.length) return notes
-
       const query = state.searchQuery.toLowerCase()
-
       return notes.filter((note) => {
         const passesSearch =
           !state.searchQuery.trim() ||
           note.title.toLowerCase().includes(query) ||
           note.content.toLowerCase().includes(query) ||
           note.tags.some((tag) => tag.toLowerCase().includes(query))
-
         const passesTags =
           !state.selectedTags.length || note.tags.some((tag) => state.selectedTags.includes(tag))
-
         return passesSearch && passesTags
       })
     },
   },
-
   actions: {
     selectNote(id: string) {
       this.selectedNoteId = id
@@ -103,6 +113,15 @@ export const useNoteStore = defineStore('noteStore', {
     },
     setViewMode(mode: 'notes' | 'archived') {
       this.viewMode = mode
+    },
+    updateNote(updated: Note) {
+      const index = this.notes.findIndex((n) => n.id === updated.id)
+      if (index !== -1) {
+        this.notes[index] = {
+          ...updated,
+          updatedAt: new Date().toISOString(),
+        }
+      }
     },
   },
 })
