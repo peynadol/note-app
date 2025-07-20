@@ -4,6 +4,9 @@ const note = {
   content: `This is a sample note to demonstrate how the note content will appear in the application. You can edit this note or add new notes to keep track of your thoughts and ideas.
 You can also organize your notes by category, search for specific keywords, and pin important notes to the top of your list. Don't forget to regularly review and update your notes to stay organized and productive.
 Feel free to experiment with different note-taking strategies to find what works best for you!`,
+  tags: ['Dev', 'Vue'],
+  dateCreated: '19 July 2025',
+  lastEdited: '20 July 2025',
 }
 import NoteContentFooter from '@/components/NoteContentFooter.vue'
 import NoteContentHeader from '@/components/NoteContentHeader.vue'

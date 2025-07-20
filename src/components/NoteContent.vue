@@ -8,7 +8,7 @@ defineProps<{
 }>()
 </script>
 <template>
-  <p class="text-slate-200 leading-relaxed whitespace-pre-line">
+  <p class="text-slate-200 leading-relaxed whitespace-pre-line border-t border-slate-700 pt-4">
     {{ note.content }}
   </p>
 </template>
