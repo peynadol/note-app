@@ -19,8 +19,19 @@ const debouncedSave = debounce((note: Note) => {
 
 watch(
   () => note.value?.title,
-  () => {
-    if (note.value) debouncedSave(note.value)
+  (newVal, oldVal) => {
+    if (newVal !== oldVal && note.value) {
+      debouncedSave(note.value)
+    }
+  },
+)
+
+watch(
+  () => note.value?.content,
+  (newVal, oldVal) => {
+    if (newVal !== oldVal && note.value) {
+      debouncedSave(note.value)
+    }
   },
 )
 </script>

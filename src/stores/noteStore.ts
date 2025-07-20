@@ -20,7 +20,7 @@ const defaultNotes: Note[] = [
     title: 'Vue Notes',
     content: 'Script setup is neat. Use defineProps for clarity.',
     tags: ['Vue', 'Tips'],
-    createdAt: '2025-07-15',
+    createdAt: '18/07/2025',
     updatedAt: '2025-07-18',
     archived: false,
   },
@@ -29,7 +29,7 @@ const defaultNotes: Note[] = [
     title: 'Archived ideas',
     content: 'Think about keyboard shortcuts for editing flow.',
     tags: ['UX'],
-    createdAt: '2025-07-10',
+    createdAt: '10/07/2025',
     updatedAt: '2025-07-17',
     archived: true,
   },
@@ -38,7 +38,7 @@ const defaultNotes: Note[] = [
     title: 'Note-taking strategies',
     content: 'Organize notes by category, search keywords, pin important notes.',
     tags: ['Productivity', 'Organization'],
-    createdAt: '2025-07-20',
+    createdAt: '18/07/2025',
     updatedAt: '2025-07-20',
     archived: false,
   },
@@ -119,7 +119,7 @@ export const useNoteStore = defineStore('noteStore', {
       if (index !== -1) {
         this.notes[index] = {
           ...updated,
-          updatedAt: new Date().toISOString(),
+          updatedAt: new Date().toLocaleDateString(),
         }
       }
     },
