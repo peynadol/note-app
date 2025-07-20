@@ -54,6 +54,7 @@ export const useNoteStore = defineStore('noteStore', {
     selectedNoteId: '1',
     searchQuery: '',
     selectedTags: [] as string[],
+    viewMode: 'notes' as 'notes' | 'archived',
   }),
 
   getters: {
@@ -61,23 +62,28 @@ export const useNoteStore = defineStore('noteStore', {
       return state.notes.find((note) => note.id === state.selectedNoteId) || null
     },
     filteredNotes: (state) => {
-      if (!state.searchQuery.trim() && !state.selectedTags.length) return state.notes
+      let notes = state.notes
 
-      return state.notes.filter((note) => {
-        const query = state.searchQuery.toLowerCase()
+      // Apply archive filter
+      notes = notes.filter((note) =>
+        state.viewMode === 'archived' ? note.archived : !note.archived,
+      )
 
-        // Check if it passes search test (only if there's a search query)
+      // If no filters, return early
+      if (!state.searchQuery.trim() && !state.selectedTags.length) return notes
+
+      const query = state.searchQuery.toLowerCase()
+
+      return notes.filter((note) => {
         const passesSearch =
           !state.searchQuery.trim() ||
           note.title.toLowerCase().includes(query) ||
           note.content.toLowerCase().includes(query) ||
           note.tags.some((tag) => tag.toLowerCase().includes(query))
 
-        // Check if it passes tag test (only if there are selected tags)
         const passesTags =
           !state.selectedTags.length || note.tags.some((tag) => state.selectedTags.includes(tag))
 
-        // Note must pass both tests
         return passesSearch && passesTags
       })
     },
@@ -94,6 +100,9 @@ export const useNoteStore = defineStore('noteStore', {
       } else {
         this.selectedTags.push(tag)
       }
+    },
+    setViewMode(mode: 'notes' | 'archived') {
+      this.viewMode = mode
     },
   },
 })
