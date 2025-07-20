@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useNoteStore } from '@/stores/noteStore'
 import NoteTag from '@/components/NoteTag.vue'
 defineProps<{
   note: {
@@ -9,14 +10,18 @@ defineProps<{
   }
 }>()
 
+const noteStore = useNoteStore()
 const emit = defineEmits<{
   (e: 'select', id: string): void
 }>()
 </script>
 <template>
   <div
-    class="cursor-pointer flex flex-col space-y-2 border-b border-slate-700 hover:bg-slate-600 pb-4 w-full"
     @click="emit('select', note.id)"
+    :class="[
+      'rounded p-1 pl-2 cursor-pointer space-y-2 border-b border-slate-700',
+      note.id === noteStore.selectedNoteId ? 'bg-slate-700' : 'hover:bg-slate-600',
+    ]"
   >
     <h1 class="text-2xl font-semibold">{{ note.title }}</h1>
     <div class="flex space-x-2">

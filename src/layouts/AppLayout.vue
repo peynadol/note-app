@@ -1,24 +1,8 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
 import NotesList from '@/components/NotesList.vue'
 import NoteContentContainer from '@/components/NoteContentContainer.vue'
 import NoteActions from '@/components/NoteActions.vue'
 import LeftSidebar from '@/components/LeftSidebar.vue'
-// const navItems = [
-//   { label: 'All Notes', icon: 'pi pi-book', name: 'notes' },
-//   { label: 'Archive', icon: 'pi pi-folder', name: 'archive' },
-// ]
-// TODO: replace with dynamic tags from a store or API
-// TODO: make tags toggleable and filter notes based on selected tags
-// const tags = [
-//   { label: 'Work', icon: 'pi pi-tag', name: 'work' },
-//   { label: 'Personal', icon: 'pi pi-tag', name: 'personal' },
-//   { label: 'Important', icon: 'pi pi-tag', name: 'important' },
-//   { label: 'Ideas', icon: 'pi pi-tag', name: 'ideas' },
-//   { label: 'To-Do', icon: 'pi pi-tag', name: 'todo' },
-//   { label: 'Inspiration', icon: 'pi pi-tag', name: 'inspiration' },
-//   { label: 'Favorites', icon: 'pi pi-tag', name: 'favorites' },
-// ]
 </script>
 <template>
   <div class="grid grid-cols-[16rem_1fr] min-h-screen">
