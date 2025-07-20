@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import NotesList from '@/components/NotesList.vue'
-import NoteContent from '@/components/NoteContent.vue'
+import NoteContentContainer from '@/components/NoteContentContainer.vue'
 import NoteActions from '@/components/NoteActions.vue'
 const navItems = [
   { label: 'All Notes', icon: 'pi pi-book', name: 'notes' },
@@ -74,7 +74,7 @@ const tags = [
       <main class="flex-1 bg-surface-900 text-white overflow-y-auto">
         <div class="grid grid-cols-[16rem_1fr_14rem] h-full">
           <NotesList />
-          <NoteContent />
+          <NoteContentContainer />
           <NoteActions />
         </div>
       </main>
