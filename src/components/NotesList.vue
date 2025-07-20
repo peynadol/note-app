@@ -2,9 +2,10 @@
 import NotesListCard from './NotesListCard.vue'
 import { useNoteStore } from '@/stores/noteStore'
 import type { Note } from '@/stores/noteStore'
+import { computed } from 'vue'
 
 const noteStore = useNoteStore()
-const notes: Note[] = noteStore.notes
+const notes = computed<Note[]>(() => noteStore.filteredNotes)
 </script>
 <template>
   <div class="space-y-6 p-4 w-full">

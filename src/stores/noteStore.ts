@@ -52,11 +52,25 @@ export const useNoteStore = defineStore('noteStore', {
       },
     ] as Note[],
     selectedNoteId: '1',
+    searchQuery: '',
   }),
 
   getters: {
     selectedNote: (state) => {
       return state.notes.find((note) => note.id === state.selectedNoteId) || null
+    },
+    filteredNotes: (state) => {
+      if (!state.searchQuery.trim()) return state.notes
+
+      const query = state.searchQuery.toLowerCase()
+
+      return state.notes.filter((note) => {
+        return (
+          note.title.toLowerCase().includes(query) ||
+          note.content.toLowerCase().includes(query) ||
+          note.tags.some((tag) => tag.toLowerCase().includes(query))
+        )
+      })
     },
   },
 
