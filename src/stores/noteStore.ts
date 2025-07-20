@@ -53,6 +53,7 @@ export const useNoteStore = defineStore('noteStore', {
     ] as Note[],
     selectedNoteId: '1',
     searchQuery: '',
+    selectedTags: [] as string[],
   }),
 
   getters: {
@@ -60,16 +61,24 @@ export const useNoteStore = defineStore('noteStore', {
       return state.notes.find((note) => note.id === state.selectedNoteId) || null
     },
     filteredNotes: (state) => {
-      if (!state.searchQuery.trim()) return state.notes
-
-      const query = state.searchQuery.toLowerCase()
+      if (!state.searchQuery.trim() && !state.selectedTags.length) return state.notes
 
       return state.notes.filter((note) => {
-        return (
+        const query = state.searchQuery.toLowerCase()
+
+        // Check if it passes search test (only if there's a search query)
+        const passesSearch =
+          !state.searchQuery.trim() ||
           note.title.toLowerCase().includes(query) ||
           note.content.toLowerCase().includes(query) ||
           note.tags.some((tag) => tag.toLowerCase().includes(query))
-        )
+
+        // Check if it passes tag test (only if there are selected tags)
+        const passesTags =
+          !state.selectedTags.length || note.tags.some((tag) => state.selectedTags.includes(tag))
+
+        // Note must pass both tests
+        return passesSearch && passesTags
       })
     },
   },
@@ -77,6 +86,14 @@ export const useNoteStore = defineStore('noteStore', {
   actions: {
     selectNote(id: string) {
       this.selectedNoteId = id
+    },
+    toggleTag(tag: string) {
+      const index = this.selectedTags.indexOf(tag)
+      if (index > -1) {
+        this.selectedTags.splice(index, 1)
+      } else {
+        this.selectedTags.push(tag)
+      }
     },
   },
 })

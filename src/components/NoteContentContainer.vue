@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import NoteContentFooter from '@/components/NoteContentFooter.vue'
 import NoteContentHeader from '@/components/NoteContentHeader.vue'
 import NoteContent from '@/components/NoteContent.vue'
 import { useNoteStore } from '@/stores/noteStore'

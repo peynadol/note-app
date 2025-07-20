@@ -35,7 +35,13 @@ const tags = computed(() => {
         <li
           v-for="tag in tags"
           :key="tag"
-          class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors hover:bg-slate-700 cursor-pointer"
+          @click="noteStore.toggleTag(tag)"
+          :class="[
+            'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors cursor-pointer',
+            noteStore.selectedTags.includes(tag)
+              ? 'bg-blue-600 hover:bg-blue-700'
+              : 'hover:bg-slate-700',
+          ]"
         >
           <i class="pi pi-tag"></i>
           <span>{{ tag }}</span>
