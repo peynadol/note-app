@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+// maybe default the selected note to the most recent one
 
 export type Note = {
   id: string
@@ -50,5 +51,18 @@ export const useNoteStore = defineStore('noteStore', {
         archived: false,
       },
     ] as Note[],
+    selectedNoteId: '1',
   }),
+
+  getters: {
+    selectedNote: (state) => {
+      return state.notes.find((note) => note.id === state.selectedNoteId) || null
+    },
+  },
+
+  actions: {
+    selectNote(id: string) {
+      this.selectedNoteId = id
+    },
+  },
 })
