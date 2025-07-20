@@ -1,0 +1,54 @@
+import { defineStore } from 'pinia'
+
+export type Note = {
+  id: string
+  title: string
+  content: string
+  tags: string[]
+  createdAt: string
+  updatedAt: string
+  archived: boolean
+}
+
+export const useNoteStore = defineStore('noteStore', {
+  state: () => ({
+    notes: [
+      {
+        id: '1',
+        title: 'Vue Notes',
+        content: 'Script setup is neat. Use defineProps for clarity.',
+        tags: ['Vue', 'Tips'],
+        createdAt: '2025-07-15',
+        updatedAt: '2025-07-18',
+        archived: false,
+      },
+      {
+        id: '2',
+        title: 'Archived ideas',
+        content: 'Think about keyboard shortcuts for editing flow.',
+        tags: ['UX'],
+        createdAt: '2025-07-10',
+        updatedAt: '2025-07-17',
+        archived: true,
+      },
+      {
+        id: '3',
+        title: 'Note-taking strategies',
+        content: 'Organize notes by category, search keywords, pin important notes.',
+        tags: ['Productivity', 'Organization'],
+        createdAt: '2025-07-20',
+        updatedAt: '2025-07-20',
+        archived: false,
+      },
+      {
+        id: '4',
+        title: 'Daily Journal',
+        content: 'Reflect on the day, jot down thoughts, and plan for tomorrow.',
+        tags: ['Personal', 'Reflection'],
+        createdAt: '2025-07-21',
+        updatedAt: '2025-07-21',
+        archived: false,
+      },
+    ] as Note[],
+  }),
+})

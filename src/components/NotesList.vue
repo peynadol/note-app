@@ -1,32 +1,30 @@
 <script setup lang="ts">
 import NotesListCard from './NotesListCard.vue'
-type Note = {
-  id: number
-  title: string
-  overview: string
-  date: string
-}
+import { useNoteStore } from '@/stores/noteStore'
+import type { Note } from '@/stores/noteStore'
 
-const notes: Note[] = [
-  {
-    id: 1,
-    title: 'Grocery List',
-    overview: 'Buy milk, eggs, and bread.',
-    date: '2024-06-10',
-  },
-  {
-    id: 2,
-    title: 'Meeting Notes',
-    overview: 'Discussed project milestones and deadlines.',
-    date: '2024-06-09',
-  },
-  {
-    id: 3,
-    title: 'Book Ideas',
-    overview: 'Outline for new science fiction novel.',
-    date: '2024-06-08',
-  },
-]
+const noteStore = useNoteStore()
+const notes: Note[] = noteStore.notes
+// const notes: Note[] = [
+//   {
+//     id: 1,
+//     title: 'Grocery List',
+//     overview: 'Buy milk, eggs, and bread.',
+//     date: '2024-06-10',
+//   },
+//   {
+//     id: 2,
+//     title: 'Meeting Notes',
+//     overview: 'Discussed project milestones and deadlines.',
+//     date: '2024-06-09',
+//   },
+//   {
+//     id: 3,
+//     title: 'Book Ideas',
+//     overview: 'Outline for new science fiction novel.',
+//     date: '2024-06-08',
+//   },
+// ]
 </script>
 <template>
   <div class="space-y-6 p-4 w-full">
@@ -42,8 +40,6 @@ const notes: Note[] = [
         <span class="text-xs text-slate-500">{{ note.date }}</span>
       </li>
     </ul> -->
-    <NotesListCard />
-    <NotesListCard />
-    <NotesListCard />
+    <NotesListCard v-for="note in notes" :key="note.id" :note="note" />
   </div>
 </template>

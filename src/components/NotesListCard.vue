@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import NotesListCardTag from '@/components/NoteTag.vue'
+import NoteTag from '@/components/NoteTag.vue'
+defineProps<{
+  note: {
+    title: string
+    tags: string[]
+    createdAt: string
+  }
+}>()
 </script>
 <template>
   <div class="flex flex-col space-y-2 border-b border-slate-700 pb-4 w-full">
-    <h1 class="text-2xl font-semibold">Vue Directives</h1>
-    <!-- tag placeholder-->
+    <h1 class="text-2xl font-semibold">{{ note.title }}</h1>
     <div class="flex space-x-2">
-      <NotesListCardTag />
+      <NoteTag v-for="tag in note.tags" :key="tag" :tag="tag" :variant="'card'" />
     </div>
-    <p class="text-sm text-gray-400">19 July 2025</p>
+    <p class="text-sm text-gray-400">{{ note.createdAt }}</p>
   </div>
 </template>

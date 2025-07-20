@@ -6,7 +6,9 @@ type NoteTagProps = {
 defineProps<NoteTagProps>()
 </script>
 <template>
-  <span :class="['text-sm text-white', variant === 'card' ? 'bg-slate-600 px-2 py-1 rounded' : '']">
+  <span
+    :class="['text-sm text-white', variant === 'card' ? 'bg-slate-600 px-2 py-0.5  rounded' : '']"
+  >
     {{ tag }}
   </span>
 </template>
