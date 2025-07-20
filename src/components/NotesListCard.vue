@@ -1,4 +1,7 @@
 <script setup lang="ts">
+//TODO: decide how to style delete icon
+//TODO: add an archive button also
+//TODO: add a confirmation dialog before deleting a note
 import { useNoteStore } from '@/stores/noteStore'
 import NoteTag from '@/components/NoteTag.vue'
 defineProps<{
@@ -28,5 +31,8 @@ const emit = defineEmits<{
       <NoteTag v-for="tag in note.tags" :key="tag" :tag="tag" :variant="'card'" />
     </div>
     <p class="text-sm text-gray-400">{{ note.createdAt }}</p>
+    <div>
+      <i class="pi pi-trash hover:text-red-500" @click="noteStore.deleteNote(note.id)"></i>
+    </div>
   </div>
 </template>

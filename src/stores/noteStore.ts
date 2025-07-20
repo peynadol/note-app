@@ -123,5 +123,8 @@ export const useNoteStore = defineStore('noteStore', {
         }
       }
     },
+    deleteNote(id: string) {
+      this.notes = this.notes.filter((note) => note.id !== id)
+    },
   },
 })
