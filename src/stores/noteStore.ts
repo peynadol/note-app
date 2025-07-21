@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { nanoid } from 'nanoid'
 
 // maybe default the selected note to the most recent one
 export type Note = {
@@ -125,6 +126,19 @@ export const useNoteStore = defineStore('noteStore', {
     },
     deleteNote(id: string) {
       this.notes = this.notes.filter((note) => note.id !== id)
+    },
+    createNote() {
+      const newNote: Note = {
+        id: nanoid(),
+        title: '',
+        content: '',
+        tags: [],
+        createdAt: new Date().toLocaleDateString(),
+        updatedAt: new Date().toLocaleDateString(),
+        archived: false,
+      }
+      this.notes.unshift(newNote)
+      this.selectedNoteId = newNote.id
     },
   },
 })

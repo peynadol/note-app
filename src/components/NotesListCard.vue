@@ -26,7 +26,7 @@ const emit = defineEmits<{
       note.id === noteStore.selectedNoteId ? 'bg-slate-700' : 'hover:bg-slate-600',
     ]"
   >
-    <h1 class="text-2xl font-semibold">{{ note.title }}</h1>
+    <h1 class="text-2xl font-semibold">{{ note.title || 'Untitled Note' }}</h1>
     <div class="flex space-x-2">
       <NoteTag v-for="tag in note.tags" :key="tag" :tag="tag" :variant="'card'" />
     </div>
