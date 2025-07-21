@@ -140,5 +140,13 @@ export const useNoteStore = defineStore('noteStore', {
       this.notes.unshift(newNote)
       this.selectedNoteId = newNote.id
     },
+    updateNoteTags(noteId: string, newTags: string[]) {
+      const note = this.notes.find((n) => n.id === noteId)
+      if (note) {
+        note.tags = newTags
+        this.updateNote(note)
+        localStorage.setItem('notes', JSON.stringify(this.notes))
+      }
+    },
   },
 })
