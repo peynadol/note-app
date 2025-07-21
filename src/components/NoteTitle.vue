@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useNoteStore } from '@/stores/noteStore'
 import type { Note } from '@/stores/noteStore'
-import { computed, watch, ref, nextTick } from 'vue'
+import { computed, watch, ref, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import { debounce } from 'lodash-es'
 
 const noteStore = useNoteStore()
@@ -17,6 +17,22 @@ const debouncedSave = debounce((note: Note) => {
   noteStore.updateNote(note)
   saveToLocalStorage()
 }, 500)
+
+onMounted(() => {
+  const handler = (e: KeyboardEvent) => {
+    if (e.ctrlKey && e.metaKey && e.key.toLowerCase() === 'n') {
+      e.preventDefault()
+      noteStore.createNote()
+      saveToLocalStorage()
+    }
+  }
+
+  window.addEventListener('keydown', handler)
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('keydown', handler)
+  })
+})
 
 watch(
   () => note.value?.title,
