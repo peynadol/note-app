@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useNoteStore } from '@/stores/noteStore'
 import type { Note } from '@/stores/noteStore'
-import { computed, watch } from 'vue'
+import { computed, watch, ref, nextTick } from 'vue'
 import { debounce } from 'lodash-es'
 
 const noteStore = useNoteStore()
 const note = computed(() => noteStore.selectedNote)
+const titleInput = ref<HTMLInputElement | null>(null)
 
 const saveToLocalStorage = () => {
   const data = JSON.stringify(noteStore.notes)
@@ -25,6 +26,13 @@ watch(
     }
   },
 )
+watch(
+  () => noteStore.selectedNoteId,
+  async () => {
+    await nextTick()
+    titleInput.value?.focus()
+  },
+)
 
 watch(
   () => note.value?.content,
@@ -41,6 +49,7 @@ watch(
     v-if="note"
     v-model="note.title"
     class="text-2xl font-semibold mb-4 pt-4 bg-transparent outline-none w-full"
+    ref="titleInput"
     placeholder="Untitled note"
   />
 </template>
